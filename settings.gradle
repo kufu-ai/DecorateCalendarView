@@ -1,1 +1,1 @@
-include ':DecorateCalendarView'
+include ':DecorateCalendarView', ':sample'
