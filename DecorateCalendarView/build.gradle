@@ -1,4 +1,5 @@
 apply plugin: 'android-library'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 18
@@ -21,4 +22,17 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+def deployTo = new File(rootDir, "repository")
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: "file://${deployTo}"
+            pom.version = '0.0.1'
+            pom.groupId = 'net.zaim'
+            pom.artifactId = 'decoratecalendarview'
+        }
+    }
 }

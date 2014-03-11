@@ -174,7 +174,7 @@ public class DecorateCalendarView extends LinearLayout {
     private int getSkipCount(Calendar targetCalendar) {
         int skipCount;
         int firstDayOfWeekOfMonth = targetCalendar.get(Calendar.DAY_OF_WEEK);
-        
+
         if (BIGINNING_DAY_OF_WEEK > firstDayOfWeekOfMonth) {
             skipCount = firstDayOfWeekOfMonth - BIGINNING_DAY_OF_WEEK + WEEKDAYS;
         }
