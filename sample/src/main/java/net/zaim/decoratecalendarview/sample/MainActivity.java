@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.zaim.decoratecalendarview.DecorateCalendarView;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -12,6 +14,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+        calendarView.set(2014, 3 - 1);
     }
 
 
