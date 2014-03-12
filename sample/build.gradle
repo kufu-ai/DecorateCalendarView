@@ -1,3 +1,21 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://zaim.github.com/DecorateCalendarView/repository'
+        }
+    }
+    dependencies {
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://zaim.github.com/DecorateCalendarView/repository'
+    }
+}
+
 apply plugin: 'android'
 
 android {
