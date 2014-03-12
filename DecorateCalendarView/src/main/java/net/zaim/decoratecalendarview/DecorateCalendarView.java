@@ -106,7 +106,7 @@ public class DecorateCalendarView extends LinearLayout {
         Calendar targetCalendar = getTargetCalendar(year, month);
 
         //String formatString = mTitleView.getContext().getString(R.string.format_month_year);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyymm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月");
         mTitleView.setText(formatter.format(targetCalendar.getTime()));
     }
 
