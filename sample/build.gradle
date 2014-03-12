@@ -1,18 +1,7 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url 'http://zaim.github.com/DecorateCalendarView/repository'
-        }
-    }
-    dependencies {
-    }
-}
-
 repositories {
     mavenCentral()
     maven {
-        url 'http://zaim.github.com/DecorateCalendarView/repository'
+        url 'http://zaiminc.github.com/DecorateCalendarView/repository'
     }
 }
 
