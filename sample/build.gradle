@@ -28,4 +28,5 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'net.zaim:decoratecalendarview:0.0.1'
 }
