@@ -23,6 +23,8 @@ public class DecorateCalendarView extends LinearLayout {
     private static final int DEFAULT_COLOR = Color.DKGRAY;
     private static final int DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT;
 
+    private BaseGridView gridView;
+
     private TextView mTitleView;
 
     private LinearLayout mWeekLayout;
@@ -39,6 +41,10 @@ public class DecorateCalendarView extends LinearLayout {
         createTitleView(context);
         createWeekViews(context);
         createDayViews(context);
+
+        gridView = new BaseGridView(context);
+        gridView.setNumRows(mWeeks.size());
+        addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     private void createTitleView(Context context) {
