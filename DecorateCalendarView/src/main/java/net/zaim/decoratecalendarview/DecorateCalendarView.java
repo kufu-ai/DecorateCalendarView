@@ -38,11 +38,12 @@ public class DecorateCalendarView extends LinearLayout {
         super(context, attrs);
         this.setOrientation(VERTICAL);
 
+        gridView = new BaseGridView(context);
+
         createTitleView(context);
         createWeekViews(context);
         createDayViews(context);
 
-        gridView = new BaseGridView(context);
         gridView.setNumRows(mWeeks.size());
         addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
@@ -78,7 +79,7 @@ public class DecorateCalendarView extends LinearLayout {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        addView(mWeekLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        gridView.addView(mWeekLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     private void createDayViews(Context context) {
@@ -98,7 +99,7 @@ public class DecorateCalendarView extends LinearLayout {
                 weekLine.addView(textView, layoutParams);
             }
 
-            this.addView(weekLine, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            gridView.addView(weekLine, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
 
