@@ -20,7 +20,6 @@ public class BaseGridView extends ViewGroup {
     public BaseGridView(Context context) {
         this(context, null);
     }
-
     public BaseGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         dividerPaint.setColor(getResources().getColor(android.R.color.darker_gray));
