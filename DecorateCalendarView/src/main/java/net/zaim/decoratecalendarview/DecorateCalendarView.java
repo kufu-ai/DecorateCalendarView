@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,15 +50,9 @@ public class DecorateCalendarView extends LinearLayout {
     }
 
     private void createTitleView(Context context) {
-        float scaleDensity = context.getResources().getDisplayMetrics().density;
-
-        mTitleView = new TextView(context);
-        mTitleView.setGravity(Gravity.CENTER_HORIZONTAL);
-        mTitleView.setTextSize((int) (scaleDensity * 14));
-        mTitleView.setTypeface(null, Typeface.BOLD);
-        mTitleView.setPadding(0, 0, 0, (int) (scaleDensity * 16));
-
-        addView(mTitleView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        View header = inflate(context, R.layout.header, null);
+        mTitleView = (TextView) header.findViewById(R.id.header_title);
+        addView(header);
     }
 
     private void createWeekViews(Context context) {
