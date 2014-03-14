@@ -123,7 +123,7 @@ public class DecorateCalendarView extends LinearLayout {
             weekLayout.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
-                TextView textView = (TextView) weekLayout.getChildAt(dayLoop);
+                TextView textView = (TextView) ((LinearLayout) weekLayout.getChildAt(dayLoop)).getChildAt(0);
 
                 if (weekLoop == 0 && skipCount > 0) {
                     textView.setText(" ");
