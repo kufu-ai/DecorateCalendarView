@@ -125,8 +125,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
-                dayContainer.setOnClickListener(this);
-
                 TextView textView = (TextView) dayContainer.getChildAt(0);
 
                 if (weekLoop == 0 && skipCount > 0) {
@@ -140,6 +138,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                     continue;
                 }
 
+                dayContainer.setOnClickListener(this);
                 textView.setText(String.valueOf(dayCounter));
 
                 boolean isToday = (todayYear == year && todayMonth == month && todayDay == dayCounter);
