@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -56,25 +57,18 @@ public class DecorateCalendarView extends LinearLayout {
     }
 
     private void createWeekViews(Context context) {
-        float scaleDensity = context.getResources().getDisplayMetrics().density;
-        mWeekLayout = new LinearLayout(context);
+        mWeekLayout = (LinearLayout) inflate(context, R.layout.day_of_week, null);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, BIGINNING_DAY_OF_WEEK);
 
         for (int counter = 0; counter < WEEKDAYS; counter++) {
-            TextView textView = new TextView(context);
-            textView.setGravity(Gravity.RIGHT);
-            textView.setPadding(0, 0, (int) (scaleDensity * 4), 0);
-
-            LinearLayout.LayoutParams layoutParams = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.weight = 1;
-            mWeekLayout.addView(textView, layoutParams);
-
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         gridView.addView(mWeekLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        // width, heightを一緒にセットしないとレイアウト内部のweightが効かなくなる
+        //gridView.addView(mWeekLayout);
     }
 
     private void createDayViews(Context context) {
