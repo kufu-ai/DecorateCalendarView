@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class DecorateCalendarView extends LinearLayout {
+public class DecorateCalendarView extends LinearLayout implements View.OnClickListener {
 
     private static final int WEEKDAYS = 7;
     private static final int MAX_WEEK = 6;
@@ -27,6 +27,7 @@ public class DecorateCalendarView extends LinearLayout {
 
     private BaseGridView gridView;
 
+    private View mSelectedView;
     private TextView mTitleView;
 
     private LinearLayout mWeekLayout;
@@ -123,7 +124,10 @@ public class DecorateCalendarView extends LinearLayout {
             weekLayout.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
-                TextView textView = (TextView) ((LinearLayout) weekLayout.getChildAt(dayLoop)).getChildAt(0);
+                LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
+                dayContainer.setOnClickListener(this);
+
+                TextView textView = (TextView) dayContainer.getChildAt(0);
 
                 if (weekLoop == 0 && skipCount > 0) {
                     textView.setText(" ");
@@ -174,5 +178,13 @@ public class DecorateCalendarView extends LinearLayout {
         targetCalendar.set(Calendar.MONTH, month);
         targetCalendar.set(Calendar.DAY_OF_MONTH, 1);
         return targetCalendar;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mSelectedView != null) mSelectedView.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+
+        v.setBackgroundColor(Color.CYAN);
+        mSelectedView = v;
     }
 }
