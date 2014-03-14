@@ -72,22 +72,9 @@ public class DecorateCalendarView extends LinearLayout {
     }
 
     private void createDayViews(Context context) {
-        float scaleDensity = context.getResources().getDisplayMetrics().density;
-
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
-            LinearLayout weekLine = new LinearLayout(context);
+            LinearLayout weekLine = (LinearLayout) inflate(context, R.layout.days, null);
             mWeeks.add(weekLine);
-
-            for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
-                TextView textView = new TextView(context);
-                textView.setGravity(Gravity.TOP | Gravity.RIGHT);
-                textView.setPadding(0, (int) (scaleDensity * 4), (int) (scaleDensity * 4), 0);
-
-                LayoutParams layoutParams = new LayoutParams(0, (int) (scaleDensity * 48));
-                layoutParams.weight = 1;
-                weekLine.addView(textView, layoutParams);
-            }
-
             gridView.addView(weekLine, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
