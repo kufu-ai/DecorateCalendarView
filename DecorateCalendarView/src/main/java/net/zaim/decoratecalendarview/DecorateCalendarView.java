@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -84,6 +85,8 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private void createTitleView(Context context) {
         View header = inflate(context, R.layout.header, null);
         mTitleView = (TextView) header.findViewById(R.id.header_title);
+        ((Button) header.findViewById(R.id.prev_button)).setOnClickListener(this);
+        ((Button) header.findViewById(R.id.next_button)).setOnClickListener(this);
         addView(header);
     }
 
@@ -214,14 +217,23 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        if (v instanceof LinearLayout) {
+            clickCellOfDays(v);
+        }
+        else if (v instanceof Button) {
+            clickSwitchCalendar(v);
+        }
+    }
+
+    private void clickCellOfDays(View view) {
         if (mSelectedView != null) mSelectedView.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
 
-        v.setBackgroundColor(Color.CYAN);
-        mSelectedView = v;
+        view.setBackgroundColor(Color.CYAN);
+        mSelectedView = view;
 
         Calendar cal = Calendar.getInstance();
         try {
-            int cellDay = Integer.parseInt(((TextView) ((LinearLayout) v).getChildAt(0)).getText().toString());
+            int cellDay = Integer.parseInt(((TextView) ((LinearLayout) view).getChildAt(0)).getText().toString());
             cal.set(displayYear, displayMonth, cellDay);
 
         }
@@ -229,6 +241,25 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
             e.printStackTrace();
         }
         if (mOnDecorateCalendarListener != null) mOnDecorateCalendarListener.onDayClick(cal.getTime());
+    }
+
+    private void clickSwitchCalendar(View view) {
+        if (view.getId() == R.id.prev_button) {
+            displayMonth--;
+            if (displayMonth < 1) {
+                displayMonth = 12;
+                displayYear--;
+            }
+            set(displayYear, displayMonth);
+        }
+        else if (view.getId() == R.id.next_button) {
+            displayMonth++;
+            if (displayMonth > 12) {
+                displayMonth -= 12;
+                displayYear++;
+            }
+            set(displayYear, displayMonth);
+        }
     }
 
     public void setOnDecorateCalendarListener(OnDecorateCalendarListener listener) {
