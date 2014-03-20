@@ -17,6 +17,9 @@ public class MainActivity extends ActionBarActivity {
 
         DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
         calendarView.set(2014, 3 - 1);
+
+        calendarView.setPaymentLabel(10, "¥1,200");
+        calendarView.setIncomeLabel(10, "¥10,000");
     }
 
 
