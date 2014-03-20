@@ -228,7 +228,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        mOnDecorateCalendarListener.onDayClick(cal.getTime());
+        if (mOnDecorateCalendarListener != null) mOnDecorateCalendarListener.onDayClick(cal.getTime());
     }
 
     public void setOnDecorateCalendarListener(OnDecorateCalendarListener listener) {

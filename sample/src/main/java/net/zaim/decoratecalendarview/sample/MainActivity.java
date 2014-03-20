@@ -4,11 +4,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import net.zaim.decoratecalendarview.DecorateCalendarView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements DecorateCalendarView.OnDecorateCalendarListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+        calendarView.setOnDecorateCalendarListener(this);
         calendarView.set(2014, 3 - 1);
 
         calendarView.setPaymentLabel(10, "¥1,200");
@@ -43,4 +48,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onDayClick(Date day) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Toast.makeText(this, format.format(day), Toast.LENGTH_SHORT).show();
+    }
 }
