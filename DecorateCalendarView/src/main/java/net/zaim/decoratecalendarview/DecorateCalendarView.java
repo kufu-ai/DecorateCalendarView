@@ -113,6 +113,12 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         }
     }
 
+    public void set(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH));
+    }
+
     public void set(int year, int month) {
         this.displayYear = year;
         this.displayMonth = month;
