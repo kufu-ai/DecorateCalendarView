@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -51,6 +49,28 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
+    public void setPaymentLabel(int day, String text) {
+        setLabelWithPosition(day, text, 1);
+    }
+
+    public void setIncomeLabel(int day, String text) {
+        setLabelWithPosition(day, text, 2);
+    }
+
+    private void setLabelWithPosition(int day, String text, int position) {
+        for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
+            LinearLayout weekLayout = mWeeks.get(weekLoop);
+            for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
+                LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
+                int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(0)).getText().toString());
+                if (cellDay == day) {
+                    ((TextView) dayContainer.getChildAt(position)).setText(text);
+                    break;
+                }
+            }
+        }
+    }
+
     private void createTitleView(Context context) {
         View header = inflate(context, R.layout.header, null);
         mTitleView = (TextView) header.findViewById(R.id.header_title);
@@ -74,7 +94,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     private void createDayViews(Context context) {
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
-            LinearLayout weekLine = (LinearLayout) inflate(context, R.layout.days, null);
+            LinearLayout weekLine = (LinearLayout) inflate(context, R.layout.row_week, null);
             mWeeks.add(weekLine);
             gridView.addView(weekLine, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
@@ -152,6 +172,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                     textView.setTextColor(DEFAULT_COLOR);
                     textView.setTypeface(null, Typeface.NORMAL);
                 }
+
                 dayCounter++;
             }
         }
