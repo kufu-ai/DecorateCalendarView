@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DecorateCalendarView extends LinearLayout implements View.OnClickListener {
 
@@ -22,6 +23,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int TODAY_COLOR = Color.RED;
     private static final int DEFAULT_COLOR = Color.DKGRAY;
     private static final int DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT;
+
+    private OnDecorateCalendarListener mOnDecorateCalendarListener;
+    private int displayYear;
+    private int displayMonth;
 
     private BaseGridView gridView;
 
@@ -106,6 +111,8 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     public void set(int year, int month) {
+        this.displayYear = year;
+        this.displayMonth = month;
         setTitle(year, month);
         setWeeks();
         setDays(year, month);
@@ -211,5 +218,24 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
         v.setBackgroundColor(Color.CYAN);
         mSelectedView = v;
+
+        Calendar cal = Calendar.getInstance();
+        try {
+            int cellDay = Integer.parseInt(((TextView) ((LinearLayout) v).getChildAt(0)).getText().toString());
+            cal.set(displayYear, displayMonth, cellDay);
+
+        }
+        catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        mOnDecorateCalendarListener.onDayClick(cal.getTime());
+    }
+
+    public void setOnDecorateCalendarListener(OnDecorateCalendarListener listener) {
+        mOnDecorateCalendarListener = listener;
+    }
+
+    public abstract interface OnDecorateCalendarListener {
+        void onDayClick(Date day);
     }
 }
