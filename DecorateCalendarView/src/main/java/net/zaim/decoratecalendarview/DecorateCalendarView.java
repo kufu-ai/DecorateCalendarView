@@ -62,10 +62,15 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
             LinearLayout weekLayout = mWeeks.get(weekLoop);
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
-                int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(0)).getText().toString());
-                if (cellDay == day) {
-                    ((TextView) dayContainer.getChildAt(position)).setText(text);
-                    break;
+                try {
+                    int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(0)).getText().toString());
+                    if (cellDay == day) {
+                        ((TextView) dayContainer.getChildAt(position)).setText(text);
+                        break;
+                    }
+                }
+                catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
             }
         }
