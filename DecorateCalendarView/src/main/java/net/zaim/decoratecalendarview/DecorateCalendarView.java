@@ -125,6 +125,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         setTitle(year, month);
         setWeeks();
         setDays(year, month);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, 1);
+        if (mOnDecorateCalendarListener != null) mOnDecorateCalendarListener.onChangeDisplayMonth(calendar.getTime());
     }
 
     private void setTitle(int year, int month) {
@@ -274,5 +278,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     public abstract interface OnDecorateCalendarListener {
         void onDayClick(Date day);
+        void onChangeDisplayMonth(Date date);
     }
 }
