@@ -53,4 +53,10 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Toast.makeText(this, format.format(day), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onChangeDisplayMonth(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Toast.makeText(this, format.format(date), Toast.LENGTH_SHORT).show();
+    }
 }

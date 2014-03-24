@@ -85,8 +85,8 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private void createTitleView(Context context) {
         View header = inflate(context, R.layout.header, null);
         mTitleView = (TextView) header.findViewById(R.id.header_title);
-        ((Button) header.findViewById(R.id.prev_button)).setOnClickListener(this);
-        ((Button) header.findViewById(R.id.next_button)).setOnClickListener(this);
+        ((TextView) header.findViewById(R.id.prev_button)).setOnClickListener(this);
+        ((TextView) header.findViewById(R.id.next_button)).setOnClickListener(this);
         addView(header);
     }
 
@@ -230,7 +230,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         if (v instanceof LinearLayout) {
             clickCellOfDays(v);
         }
-        else if (v instanceof Button) {
+        else if (v instanceof TextView) {
             clickSwitchCalendar(v);
         }
     }
