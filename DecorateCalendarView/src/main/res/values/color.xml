@@ -2,4 +2,6 @@
 <resources>
     <color name="dark_green">#27ae60</color>
     <color name="dark_red">#c0392b</color>
+    <color name="default_background">#fefefe</color>
+    <color name="disable_background">#f0f0f0</color>
 </resources>

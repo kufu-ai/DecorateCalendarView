@@ -27,7 +27,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
     private static final int TODAY_COLOR = Color.RED;
     private static final int DEFAULT_COLOR = Color.DKGRAY;
-    private static final int DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT;
 
     private OnDecorateCalendarListener mOnDecorateCalendarListener;
     private int displayYear;
@@ -169,7 +168,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
             LinearLayout weekLayout = mWeeks.get(weekLoop);
-            weekLayout.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
@@ -180,12 +178,14 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
                 if (weekLoop == 0 && skipCount > 0) {
                     dateLabel.setText(" ");
+                    dayContainer.setBackgroundColor(getResources().getColor(R.color.disable_background));
                     skipCount--;
                     continue;
                 }
 
                 if (lastDay < dayCounter) {
                     dateLabel.setText(" ");
+                    dayContainer.setBackgroundColor(getResources().getColor(R.color.disable_background));
                     continue;
                 }
 
@@ -241,11 +241,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     private void clickCellOfDays(View view) {
-        if (mSelectedView != null) mSelectedView.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
-
-        view.setBackgroundColor(Color.CYAN);
-        mSelectedView = view;
-
         Calendar cal = Calendar.getInstance();
         try {
             int cellDay = Integer.parseInt(((TextView) ((LinearLayout) view).getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
