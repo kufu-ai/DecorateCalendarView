@@ -168,7 +168,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
             LinearLayout weekLayout = mWeeks.get(weekLoop);
-            weekLayout.setBackgroundColor(getResources().getColor(R.color.default_background));
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
@@ -191,6 +190,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                 }
 
                 dayContainer.setOnClickListener(this);
+                dayContainer.setBackgroundColor(getResources().getColor(R.color.default_background));
                 dateLabel.setText(String.valueOf(dayCounter));
 
                 boolean isToday = (todayYear == year && todayMonth == month && todayDay == dayCounter);
