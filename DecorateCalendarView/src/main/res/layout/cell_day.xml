@@ -8,18 +8,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:layout_weight="1"
-        android:padding="2dp">
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
             android:gravity="left"
             android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
             android:gravity="right"
             android:textSize="10sp"
             android:textColor="@color/dark_red" />
@@ -27,6 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
             android:gravity="right"
             android:textSize="10sp"
             android:textColor="@color/dark_green" />
