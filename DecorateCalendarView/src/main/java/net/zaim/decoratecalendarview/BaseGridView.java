@@ -36,7 +36,7 @@ public class BaseGridView extends ViewGroup {
         canvas.drawLine(left, top, left, bottom, dividerPaint);
 
         for (int counter = 0; counter < 7; counter++) {
-            int x = left + row.getChildAt(counter).getRight() + 1;
+            int x = left + row.getChildAt(counter).getRight();
             canvas.drawLine(x, top, x, bottom, dividerPaint);
         }
     }
