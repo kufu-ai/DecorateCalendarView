@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 18
-        versionCode 5
-        versionName "1.1.2"
+        versionCode 6
+        versionName "1.1.3"
     }
     buildTypes {
         releaseLibrary.initWith(buildTypes.release)
@@ -38,7 +38,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${deployTo}"
-            pom.version = '0.0.5'
+            pom.version = '0.0.6'
             pom.groupId = 'net.zaim'
             pom.artifactId = 'decoratecalendarview'
         }
