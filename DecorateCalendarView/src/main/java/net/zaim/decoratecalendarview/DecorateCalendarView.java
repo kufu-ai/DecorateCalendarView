@@ -20,6 +20,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int WEEKDAYS = 7;
     private static final int MAX_WEEK = 6;
 
+    private static final int LABEL_DATE_INDEX_AT_CELL = 0;
+    private static final int LABEL_FIRST_INDEX_AT_CELL = 1;
+    private static final int LABEL_SECOND_INDEX_AT_CELL = 2;
+
     private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
     private static final int TODAY_COLOR = Color.RED;
     private static final int DEFAULT_COLOR = Color.DKGRAY;
@@ -56,11 +60,11 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     public void setPaymentLabel(int day, String text) {
-        setLabelWithPosition(day, text, 1);
+        setLabelWithPosition(day, text, LABEL_FIRST_INDEX_AT_CELL);
     }
 
     public void setIncomeLabel(int day, String text) {
-        setLabelWithPosition(day, text, 2);
+        setLabelWithPosition(day, text, LABEL_SECOND_INDEX_AT_CELL);
     }
 
     private void setLabelWithPosition(int day, String text, int position) {
@@ -69,14 +73,13 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
                 try {
-                    int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(0)).getText().toString());
+                    int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
                     if (cellDay == day) {
                         ((TextView) dayContainer.getChildAt(position)).setText(text);
                         break;
                     }
                 }
                 catch (NumberFormatException e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -170,32 +173,34 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
-                TextView textView = (TextView) dayContainer.getChildAt(0);
+                TextView dateLabel = (TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL);
+
+                ((TextView) dayContainer.getChildAt(LABEL_FIRST_INDEX_AT_CELL)).setText(" ");
+                ((TextView) dayContainer.getChildAt(LABEL_SECOND_INDEX_AT_CELL)).setText(" ");
 
                 if (weekLoop == 0 && skipCount > 0) {
-                    textView.setText(" ");
+                    dateLabel.setText(" ");
                     skipCount--;
                     continue;
                 }
 
                 if (lastDay < dayCounter) {
-                    textView.setText(" ");
+                    dateLabel.setText(" ");
                     continue;
                 }
 
                 dayContainer.setOnClickListener(this);
-                textView.setText(String.valueOf(dayCounter));
+                dateLabel.setText(String.valueOf(dayCounter));
 
                 boolean isToday = (todayYear == year && todayMonth == month && todayDay == dayCounter);
 
                 if (isToday) {
-                    textView.setTextColor(TODAY_COLOR);
-                    textView.setTypeface(null, Typeface.BOLD);
-                    //weekLayout.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+                    dateLabel.setTextColor(TODAY_COLOR);
+                    dateLabel.setTypeface(null, Typeface.BOLD);
                 }
                 else {
-                    textView.setTextColor(DEFAULT_COLOR);
-                    textView.setTypeface(null, Typeface.NORMAL);
+                    dateLabel.setTextColor(DEFAULT_COLOR);
+                    dateLabel.setTypeface(null, Typeface.NORMAL);
                 }
 
                 dayCounter++;
@@ -243,12 +248,12 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
         Calendar cal = Calendar.getInstance();
         try {
-            int cellDay = Integer.parseInt(((TextView) ((LinearLayout) view).getChildAt(0)).getText().toString());
+            int cellDay = Integer.parseInt(((TextView) ((LinearLayout) view).getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
             cal.set(displayYear, displayMonth, cellDay);
 
         }
         catch (NumberFormatException e) {
-            e.printStackTrace();
+            return;
         }
         if (mOnDecorateCalendarListener != null) mOnDecorateCalendarListener.onDayClick(cal.getTime());
     }
