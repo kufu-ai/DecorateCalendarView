@@ -22,7 +22,7 @@ public class BaseGridView extends ViewGroup {
     }
     public BaseGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        dividerPaint.setColor(getResources().getColor(android.R.color.darker_gray));
+        dividerPaint.setColor(getResources().getColor(R.color.divider));
     }
 
     @Override

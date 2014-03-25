@@ -2,8 +2,13 @@
 <resources>
     <color name="dark_green">#27ae60</color>
     <color name="dark_red">#c0392b</color>
+    <color name="sunday_text">#a21d16</color>
+    <color name="saturday_text">#1d4b8e</color>
+    <color name="default_text">#252525</color>
+
     <color name="default_background">#fefefe</color>
     <color name="disable_background">#88f0f0f0</color>
     <color name="sunday_background">#66ffcccc</color>
     <color name="saturday_background">#66ccccff</color>
+    <color name="divider">#949494</color>
 </resources>

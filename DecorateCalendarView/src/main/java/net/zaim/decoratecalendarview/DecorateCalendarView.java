@@ -26,8 +26,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int LABEL_SECOND_INDEX_AT_CELL = 2;
 
     private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
-    private static final int TODAY_COLOR = Color.BLUE;
-    private static final int DEFAULT_COLOR = Color.DKGRAY;
 
     private OnDecorateCalendarListener mOnDecorateCalendarListener;
     private int displayYear;
@@ -197,18 +195,16 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                 boolean isToday = (todayYear == year && todayMonth == month && todayDay == dayCounter);
 
                 if (isToday) {
-                    dateLabel.setTextColor(TODAY_COLOR);
                     dateLabel.setTypeface(null, Typeface.BOLD);
                 }
                 else {
-                    dateLabel.setTextColor(DEFAULT_COLOR);
                     dateLabel.setTypeface(null, Typeface.NORMAL);
                 }
 
                 //if (dayLoop == 0) dayContainer.setBackgroundColor(getResources().getColor(R.color.sunday_background));
                 //else if (dayLoop == WEEKDAYS - 1) dayContainer.setBackgroundColor(getResources().getColor(R.color.saturday_background));
-                if (dayLoop == 0) dateLabel.setTextColor(Color.RED);
-                if (dayLoop == WEEKDAYS - 1) dateLabel.setTextColor(Color.BLUE);
+                if (dayLoop == 0) dateLabel.setTextColor(getResources().getColor(R.color.sunday_text));
+                if (dayLoop == WEEKDAYS - 1) dateLabel.setTextColor(getResources().getColor(R.color.saturday_text));
                 dayCounter++;
             }
         }
