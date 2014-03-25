@@ -8,15 +8,10 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 18
-        versionCode 8
-        versionName "1.1.5"
+        versionCode 9
+        versionName "1.1.6"
     }
     buildTypes {
-        releaseLibrary.initWith(buildTypes.release)
-        releaseLibrary {
-
-        }
-
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
@@ -38,7 +33,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${deployTo}"
-            pom.version = '0.0.8'
+            pom.version = '0.0.9'
             pom.groupId = 'net.zaim'
             pom.artifactId = 'decoratecalendarview'
         }

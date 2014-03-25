@@ -9,33 +9,33 @@
 
     <TextView
         android:id="@+id/prev_button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:paddingLeft="12dp"
-        android:gravity="left"
+        android:minHeight="48dp"
+        android:minWidth="60dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="8dp"
         android:textStyle="bold"
         android:textSize="16sp"
         android:text="＜"/>
 
     <TextView
         android:id="@+id/header_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="6dp"
+        android:layout_weight="1"
+        android:minHeight="48dp"
+        android:gravity="center"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/next_button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:paddingRight="12dp"
-        android:gravity="right"
+        android:minHeight="48dp"
+        android:minWidth="60dp"
+        android:gravity="right|center_vertical"
+        android:paddingRight="8dp"
         android:textStyle="bold"
         android:textSize="16sp"
         android:text="＞"/>
