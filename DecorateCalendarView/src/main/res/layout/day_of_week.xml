@@ -4,6 +4,7 @@
               android:id="@+id/day_of_week_container"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:paddingTop="4dp"
               android:background="@color/default_background">
 
     <TextView
