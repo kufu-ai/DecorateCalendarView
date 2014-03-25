@@ -63,7 +63,6 @@ public class BaseGridView extends ViewGroup {
 
         oldWidthMeasureSize = widthMeasureSize;
         int cellSize = widthMeasureSize / 7;
-        widthMeasureSize = cellSize * 7;
         int totalHeight = 0;
         final int rowWidthSpec = makeMeasureSpec(widthMeasureSize, EXACTLY);
         final int rowHeightSpec = makeMeasureSpec(cellSize, EXACTLY);
@@ -80,9 +79,8 @@ public class BaseGridView extends ViewGroup {
             }
         }
 
-        final int measureWidth = widthMeasureSize + 2;
         final int measureHeight = totalHeight + 2;
-        setMeasuredDimension(measureWidth, measureHeight);
+        setMeasuredDimension(widthMeasureSize, measureHeight);
     }
 
     @Override

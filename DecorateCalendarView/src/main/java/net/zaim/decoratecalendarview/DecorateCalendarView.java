@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,7 +48,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         super(context, attrs);
         this.setOrientation(VERTICAL);
 
-        gridView = new BaseGridView(context);
+        gridView = (BaseGridView) inflate(context, R.layout.month, null);
 
         createTitleView(context);
         createWeekViews(context);
@@ -92,7 +93,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     private void createWeekViews(Context context) {
-        mWeekLayout = (LinearLayout) inflate(context, R.layout.day_of_week, null);
+        mWeekLayout = (LinearLayout) gridView.findViewById(R.id.day_of_week_container);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, BIGINNING_DAY_OF_WEEK);
@@ -100,17 +101,12 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         for (int counter = 0; counter < WEEKDAYS; counter++) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
-
-        gridView.addView(mWeekLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        // width, heightを一緒にセットしないとレイアウト内部のweightが効かなくなる
-        //gridView.addView(mWeekLayout);
     }
 
     private void createDayViews(Context context) {
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
-            LinearLayout weekLine = (LinearLayout) inflate(context, R.layout.row_week, null);
+            LinearLayout weekLine = (LinearLayout) gridView.getChildAt(weekLoop + 1);
             mWeeks.add(weekLine);
-            gridView.addView(weekLine, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
 
@@ -135,7 +131,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private void setTitle(int year, int month) {
         Calendar targetCalendar = getTargetCalendar(year, month);
 
-        //String formatString = mTitleView.getContext().getString(R.string.format_month_year);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月");
         mTitleView.setText(formatter.format(targetCalendar.getTime()));
     }
