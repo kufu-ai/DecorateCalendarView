@@ -7,17 +7,15 @@
     android:orientation="horizontal"
     android:background="@color/disable_background">
 
-    <TextView
+    <ImageView
         android:id="@+id/prev_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:minWidth="60dp"
         android:gravity="left|center_vertical"
-        android:paddingLeft="8dp"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="＜"/>
+        android:src="@drawable/ic_action_previous_item"
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/header_title"
@@ -28,16 +26,14 @@
         android:gravity="center"
         android:textSize="16sp" />
 
-    <TextView
+    <ImageView
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:minWidth="60dp"
         android:gravity="right|center_vertical"
-        android:paddingRight="8dp"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="＞"/>
+        android:src="@drawable/ic_action_next_item"
+        android:scaleType="center" />
 
 </LinearLayout>
