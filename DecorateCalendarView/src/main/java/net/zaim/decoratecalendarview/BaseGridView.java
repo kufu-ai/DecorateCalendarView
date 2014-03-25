@@ -34,19 +34,22 @@ public class BaseGridView extends ViewGroup {
 
         final int left = row.getChildAt(0).getLeft() + getLeft();
         canvas.drawLine(left, top, left, bottom, dividerPaint);
+        final int right = row.getChildAt(6).getRight() + getLeft();
+        canvas.drawLine(left, top, right, top, dividerPaint);
 
-        for (int counter = 0; counter < 7; counter++) {
-            int x = left + row.getChildAt(counter).getRight();
+        for (int colLoop = 0; colLoop < 7; colLoop++) {
+            int x = left + row.getChildAt(colLoop).getRight();
             canvas.drawLine(x, top, x, bottom, dividerPaint);
+        }
+        for (int rowLoop = 1; rowLoop < 7; rowLoop++) {
+            int y = getChildAt(rowLoop).getBottom();
+            canvas.drawLine(left, y, right, y, dividerPaint);
         }
     }
 
     @Override
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
         final boolean drawResutl = super.drawChild(canvas, child, drawingTime);
-
-        final int bottom = child.getBottom() - 1;
-        canvas.drawLine(child.getLeft(), bottom, child.getRight(), bottom, dividerPaint);
         return drawResutl;
     }
 
@@ -78,7 +81,8 @@ public class BaseGridView extends ViewGroup {
         }
 
         final int measureWidth = widthMeasureSize + 2;
-        setMeasuredDimension(measureWidth, totalHeight);
+        final int measureHeight = totalHeight + 2;
+        setMeasuredDimension(measureWidth, measureHeight);
     }
 
     @Override
