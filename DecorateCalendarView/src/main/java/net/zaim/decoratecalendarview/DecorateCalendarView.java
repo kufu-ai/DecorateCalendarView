@@ -204,6 +204,8 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                     dateLabel.setTypeface(null, Typeface.NORMAL);
                 }
 
+                if (dayLoop == 0) dayContainer.setBackgroundColor(getResources().getColor(R.color.sunday_background));
+                else if (dayLoop == WEEKDAYS - 1) dayContainer.setBackgroundColor(getResources().getColor(R.color.saturday_background));
                 dayCounter++;
             }
         }

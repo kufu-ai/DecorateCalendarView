@@ -4,4 +4,6 @@
     <color name="dark_red">#c0392b</color>
     <color name="default_background">#fefefe</color>
     <color name="disable_background">#f0f0f0</color>
+    <color name="sunday_background">#66ffcccc</color>
+    <color name="saturday_background">#66ccccff</color>
 </resources>
