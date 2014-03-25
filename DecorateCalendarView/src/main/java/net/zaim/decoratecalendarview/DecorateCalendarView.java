@@ -25,7 +25,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int LABEL_SECOND_INDEX_AT_CELL = 2;
 
     private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
-    private static final int TODAY_COLOR = Color.RED;
+    private static final int TODAY_COLOR = Color.BLUE;
     private static final int DEFAULT_COLOR = Color.DKGRAY;
 
     private OnDecorateCalendarListener mOnDecorateCalendarListener;
