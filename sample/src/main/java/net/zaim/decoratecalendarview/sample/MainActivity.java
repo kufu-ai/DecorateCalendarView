@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         calendarView.setOnDecorateCalendarListener(this);
         calendarView.set(2014, 3 - 1);
 
+        calendarView.setSymbolLabel(10, "●");
         calendarView.setPaymentLabel(10, "¥1,200");
         calendarView.setIncomeLabel(10, "¥10,000");
     }

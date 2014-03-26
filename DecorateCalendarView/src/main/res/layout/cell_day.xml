@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="0dp"
@@ -9,6 +9,7 @@
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/calendar_date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
@@ -16,9 +17,22 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/calendar_symbol_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentRight="true"
+            android:textSize="9sp"
+            android:textColor="@color/divider"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/calendar_first_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
+            android:layout_below="@id/calendar_date_text"
             android:textAlignment="textEnd"
             android:gravity="right"
             android:textSize="9sp"
@@ -26,12 +40,14 @@
             android:singleLine="true" />
 
         <TextView
+            android:id="@+id/calendar_second_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
+            android:layout_below="@id/calendar_first_text"
             android:textAlignment="textEnd"
             android:gravity="right"
             android:textSize="9sp"
             android:textColor="@color/dark_green"
             android:singleLine="true" />
-    </LinearLayout>
+    </RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -23,8 +24,9 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int MAX_WEEK = 6;
 
     private static final int LABEL_DATE_INDEX_AT_CELL = 0;
-    private static final int LABEL_FIRST_INDEX_AT_CELL = 1;
-    private static final int LABEL_SECOND_INDEX_AT_CELL = 2;
+    private static final int LABEL_SYMBOL_INDEX_AT_CELL = 1;
+    private static final int LABEL_FIRST_INDEX_AT_CELL = 2;
+    private static final int LABEL_SECOND_INDEX_AT_CELL = 3;
 
     private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
 
@@ -58,6 +60,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
+    public void setSymbolLabel(int day, String text) {
+        setLabelWithPosition(day, text, LABEL_SYMBOL_INDEX_AT_CELL);
+    }
+
     public void setPaymentLabel(int day, String text) {
         setLabelWithPosition(day, text, LABEL_FIRST_INDEX_AT_CELL);
     }
@@ -70,7 +76,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
             LinearLayout weekLayout = mWeeks.get(weekLoop);
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
-                LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
+                RelativeLayout dayContainer = (RelativeLayout) weekLayout.getChildAt(dayLoop);
                 try {
                     int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
                     if (cellDay == day) {
@@ -164,7 +170,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
             LinearLayout weekLayout = mWeeks.get(weekLoop);
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
-                LinearLayout dayContainer = (LinearLayout) weekLayout.getChildAt(dayLoop);
+                RelativeLayout dayContainer = (RelativeLayout) weekLayout.getChildAt(dayLoop);
                 TextView dateLabel = (TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL);
 
                 ((TextView) dayContainer.getChildAt(LABEL_FIRST_INDEX_AT_CELL)).setText(" ");
@@ -229,7 +235,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (v instanceof LinearLayout) {
+        if (v instanceof RelativeLayout) {
             clickCellOfDays(v);
         }
         else if (v instanceof ImageView) {
@@ -240,7 +246,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private void clickCellOfDays(View view) {
         Calendar cal = Calendar.getInstance();
         try {
-            int cellDay = Integer.parseInt(((TextView) ((LinearLayout) view).getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
+            int cellDay = Integer.parseInt(((TextView) ((RelativeLayout) view).getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
             cal.set(displayYear, displayMonth, cellDay);
 
         }
