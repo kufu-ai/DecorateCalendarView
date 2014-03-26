@@ -53,8 +53,8 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         gridView = (BaseGridView) inflate(context, R.layout.month, null);
 
         createTitleView(context);
-        createWeekViews(context);
-        createDayViews(context);
+        createWeekViews();
+        createDayViews();
 
         gridView.setNumRows(mWeeks.size());
         addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -98,7 +98,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         addView(header);
     }
 
-    private void createWeekViews(Context context) {
+    private void createWeekViews() {
         mWeekLayout = (LinearLayout) gridView.findViewById(R.id.day_of_week_container);
 
         Calendar calendar = Calendar.getInstance();
@@ -109,7 +109,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         }
     }
 
-    private void createDayViews(Context context) {
+    private void createDayViews() {
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
             LinearLayout weekLine = (LinearLayout) gridView.getChildAt(weekLoop + 1);
             mWeeks.add(weekLine);
