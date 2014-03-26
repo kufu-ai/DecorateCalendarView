@@ -173,6 +173,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                 RelativeLayout dayContainer = (RelativeLayout) weekLayout.getChildAt(dayLoop);
                 TextView dateLabel = (TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL);
 
+                ((TextView) dayContainer.getChildAt(LABEL_SYMBOL_INDEX_AT_CELL)).setText(" ");
                 ((TextView) dayContainer.getChildAt(LABEL_FIRST_INDEX_AT_CELL)).setText(" ");
                 ((TextView) dayContainer.getChildAt(LABEL_SECOND_INDEX_AT_CELL)).setText(" ");
 
