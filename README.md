@@ -10,26 +10,32 @@ Usage
 -----
 
 ```xml
-    <net.zaim.decoratecalendarview.DecorateCalendarView
-        android:id="@+id/my_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<net.zaim.decoratecalendarview.DecorateCalendarView
+    android:id="@+id/my_calendar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 ```java
-    DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
-    calendarView.setOnDecorateCalendarListener(this);
-    calendarView.set(2014, 3 - 1);
-    calendarView.setSymbolLabel(10, "●");
-    calendarView.setPaymentLabel(10, "¥1,200");
-    calendarView.setIncomeLabel(10, "¥10,000");
+DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+calendarView.setOnDecorateCalendarListener(this);
+calendarView.set(2014, 3 - 1);
+calendarView.setSymbolLabel(10, "●");
+calendarView.setPaymentLabel(10, "¥1,200");
+calendarView.setIncomeLabel(10, "¥10,000");
 ```
 
 Download
 -----
 
 ```groovy
-compile 'net.zaim:decoratecalendarview:(version)`
+repositories {
+    mavenCentral()
+    maven { url 'http://zaiminc.github.com/DecorateCalendarView/repository' }
+}
+dependecies {
+    compile 'net.zaim:decoratecalendarview:(version)`
+}
 ```
 
 License
