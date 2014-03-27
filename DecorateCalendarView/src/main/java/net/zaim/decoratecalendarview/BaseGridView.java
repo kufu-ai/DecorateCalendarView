@@ -30,7 +30,7 @@ public class BaseGridView extends ViewGroup {
         super.dispatchDraw(canvas);
         final ViewGroup row = (ViewGroup) getChildAt(1);
         int top = row.getTop();
-        int bottom = getBottom();
+        int bottom = getChildAt(6).getBottom();
 
         final int left = row.getChildAt(0).getLeft() + getLeft();
         canvas.drawLine(left, top, left, bottom, dividerPaint);
