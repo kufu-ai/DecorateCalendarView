@@ -7,6 +7,5 @@
     <net.zaim.decoratecalendarview.DecorateCalendarView
         android:id="@+id/my_calendar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </net.zaim.decoratecalendarview.DecorateCalendarView>
+        android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -21,6 +21,7 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
 
         DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
         calendarView.setOnDecorateCalendarListener(this);
+        calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
         calendarView.set(2014, 3 - 1);
 
         calendarView.setSymbolLabel(10, "●");

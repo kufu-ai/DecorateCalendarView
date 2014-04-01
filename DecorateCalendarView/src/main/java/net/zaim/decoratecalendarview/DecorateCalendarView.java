@@ -1,9 +1,11 @@
 package net.zaim.decoratecalendarview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DecorateCalendarView extends LinearLayout implements View.OnClickListener {
+
+    public static final String HOLIDAY_HIGHLIGHT_TYPE_TEXT = "text";
+    public static final String HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND = "background";
 
     private static final int WEEKDAYS = 7;
     private static final int MAX_WEEK = 6;
@@ -41,6 +46,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     private LinearLayout mWeekLayout;
     private ArrayList<LinearLayout> mWeeks = new ArrayList<LinearLayout>();
+    private String mHolidayHightlightType;
 
     public DecorateCalendarView(Context context) {
         this(context, null);
@@ -58,6 +64,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
         gridView.setNumRows(mWeeks.size());
         addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    public void setHolidayHighlightType(String type) {
+        mHolidayHightlightType = type;
     }
 
     public void setSymbolLabel(int day, String text) {
@@ -203,10 +213,16 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                     dateLabel.setTypeface(null, Typeface.NORMAL);
                 }
 
-                //if (dayLoop == 0) dayContainer.setBackgroundColor(getResources().getColor(R.color.sunday_background));
-                //else if (dayLoop == WEEKDAYS - 1) dayContainer.setBackgroundColor(getResources().getColor(R.color.saturday_background));
-                if (dayLoop == 0) dateLabel.setTextColor(getResources().getColor(R.color.sunday_text));
-                if (dayLoop == WEEKDAYS - 1) dateLabel.setTextColor(getResources().getColor(R.color.saturday_text));
+                if (mHolidayHightlightType != null && mHolidayHightlightType.equals(HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND)) {
+                    if (dayLoop == 0)
+                        dayContainer.setBackgroundColor(getResources().getColor(R.color.sunday_background));
+                    else if (dayLoop == WEEKDAYS - 1)
+                        dayContainer.setBackgroundColor(getResources().getColor(R.color.saturday_background));
+                }
+                else {
+                    if (dayLoop == 0) dateLabel.setTextColor(getResources().getColor(R.color.sunday_text));
+                    if (dayLoop == WEEKDAYS - 1) dateLabel.setTextColor(getResources().getColor(R.color.saturday_text));
+                }
                 dayCounter++;
             }
         }
