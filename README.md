@@ -1,6 +1,8 @@
 DecorateCalendarView
 ====================
 
+[![Build Status](https://travis-ci.org/zaiminc/DecorateCalendarView.svg?branch=master)](https://travis-ci.org/zaiminc/DecorateCalendarView)
+
 Simple customizable calendar view for Android.
 
 ![Screenshot](screenshot.png)
