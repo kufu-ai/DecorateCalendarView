@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="dark_green">#27ae60</color>
-    <color name="dark_red">#c0392b</color>
     <color name="sunday_text">#a21d16</color>
     <color name="saturday_text">#1d4b8e</color>
     <color name="default_text">#252525</color>
