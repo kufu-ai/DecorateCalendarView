@@ -147,14 +147,14 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private void setTitle(int year, int month) {
         Calendar targetCalendar = getTargetCalendar(year, month);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月");
+        SimpleDateFormat formatter = new SimpleDateFormat(getResources().getString(R.string.calendar_title_format));
         mTitleView.setText(formatter.format(targetCalendar.getTime()));
     }
 
     private void setWeeks() {
         Calendar week = Calendar.getInstance();
         week.set(Calendar.DAY_OF_WEEK, BIGINNING_DAY_OF_WEEK);
-        SimpleDateFormat weekFormatter = new SimpleDateFormat("E");
+        SimpleDateFormat weekFormatter = new SimpleDateFormat(getResources().getString(R.string.calendar_dayofweek_format));
 
         for (int counter = 0; counter < WEEKDAYS; counter++) {
             TextView textView = (TextView) mWeekLayout.getChildAt(counter);

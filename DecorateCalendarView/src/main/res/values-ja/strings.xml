@@ -1,4 +1,4 @@
 <resources>
-    <string name="calendar_title_format">MMMM yyyy</string>
+    <string name="calendar_title_format">yyyy年MM月</string>
     <string name="calendar_dayofweek_format">E</string>
 </resources>
