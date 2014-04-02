@@ -28,8 +28,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int LABEL_MIDDLE_TEXT_INDEX = 2;
     private static final int LABEL_BOTTOM_TEXT_INDEX = 3;
 
-    private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
-
     private OnDecorateCalendarListener mOnDecorateCalendarListener;
     private int displayYear;
     private int displayMonth;
@@ -41,7 +39,8 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     private LinearLayout mWeekLayout;
     private ArrayList<LinearLayout> mWeeks = new ArrayList<LinearLayout>();
-    private String mHolidayHightlightType;
+    private String mHolidayHightlightType = HOLIDAY_HIGHLIGHT_TYPE_TEXT;
+    private int mBiginningDayOfWeek = Calendar.SUNDAY;
 
     public DecorateCalendarView(Context context) {
         this(context, null);
@@ -59,6 +58,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
         gridView.setNumRows(mWeeks.size());
         addView(gridView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    public void setmBiginningDayOfWeek(int biginningDayOfWeek) {
+        mBiginningDayOfWeek = biginningDayOfWeek;
     }
 
     public void setHolidayHighlightType(String type) {
@@ -112,7 +115,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         mWeekLayout = (LinearLayout) gridView.findViewById(R.id.day_of_week_container);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, BIGINNING_DAY_OF_WEEK);
+        calendar.set(Calendar.DAY_OF_WEEK, mBiginningDayOfWeek);
 
         for (int counter = 0; counter < WEEKDAYS; counter++) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -153,7 +156,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     private void setWeeks() {
         Calendar week = Calendar.getInstance();
-        week.set(Calendar.DAY_OF_WEEK, BIGINNING_DAY_OF_WEEK);
+        week.set(Calendar.DAY_OF_WEEK, mBiginningDayOfWeek);
         SimpleDateFormat weekFormatter = new SimpleDateFormat(getResources().getString(R.string.calendar_dayofweek_format));
 
         for (int counter = 0; counter < WEEKDAYS; counter++) {
@@ -235,11 +238,11 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         int skipCount;
         int firstDayOfWeekOfMonth = targetCalendar.get(Calendar.DAY_OF_WEEK);
 
-        if (BIGINNING_DAY_OF_WEEK > firstDayOfWeekOfMonth) {
-            skipCount = firstDayOfWeekOfMonth - BIGINNING_DAY_OF_WEEK + WEEKDAYS;
+        if (mBiginningDayOfWeek > firstDayOfWeekOfMonth) {
+            skipCount = firstDayOfWeekOfMonth - mBiginningDayOfWeek + WEEKDAYS;
         }
         else {
-            skipCount = firstDayOfWeekOfMonth - BIGINNING_DAY_OF_WEEK;
+            skipCount = firstDayOfWeekOfMonth - mBiginningDayOfWeek;
         }
         return skipCount;
     }
