@@ -1,10 +1,8 @@
 package net.zaim.decoratecalendarview.sample;
 
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
 import net.zaim.decoratecalendarview.DecorateCalendarView;
@@ -21,35 +19,18 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         setContentView(R.layout.activity_main);
 
         DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
-        calendarView.setOnDecorateCalendarListener(this);
-        calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
-        calendarView.set(2014, 3 - 1);
 
-        calendarView.setTopTextOnDay(10, "●", Color.parseColor("#eeeeee"));
+        calendarView.setOnDecorateCalendarListener(this);
+        //calendarView.setmBiginningDayOfWeek(Calendar.MONDAY);
+        //calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
+        calendarView.set(new Date());
+        //calendarView.set(2014, 3 - 1);
+
+        calendarView.setTopTextOnDay(10, "●", Color.parseColor("#888888"));
         calendarView.setMiddleTextOnDay(10, "¥1,200", Color.parseColor("#ff0000"));
         calendarView.setBottomTextOnDay(10, "¥10,000", Color.parseColor("#00ff00"));
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onDayClick(Date day) {
@@ -59,7 +40,7 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
 
     @Override
     public void onChangeDisplayMonth(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
         Toast.makeText(this, format.format(date), Toast.LENGTH_SHORT).show();
     }
 }
