@@ -23,7 +23,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int WEEKDAYS = 7;
     private static final int MAX_WEEK = 6;
 
-    private static final int LABEL_DATE_INDEX_AT_CELL = 0;
+    private static final int LABEL_DATE_TEXT_INDEX = 0;
     private static final int LABEL_TOP_TEXT_INDEX = 1;
     private static final int LABEL_MIDDLE_TEXT_INDEX = 2;
     private static final int LABEL_BOTTOM_TEXT_INDEX = 3;
@@ -87,7 +87,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 RelativeLayout dayContainer = (RelativeLayout) weekLayout.getChildAt(dayLoop);
                 try {
-                    int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
+                    int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(LABEL_DATE_TEXT_INDEX)).getText().toString());
                     if (cellDay == day) {
                         ((TextView) dayContainer.getChildAt(position)).setText(text);
                         ((TextView) dayContainer.getChildAt(position)).setTextColor(color);
@@ -181,50 +181,53 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
                 RelativeLayout dayContainer = (RelativeLayout) weekLayout.getChildAt(dayLoop);
-                TextView dateLabel = (TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL);
 
-                ((TextView) dayContainer.getChildAt(LABEL_TOP_TEXT_INDEX)).setText(" ");
-                ((TextView) dayContainer.getChildAt(LABEL_MIDDLE_TEXT_INDEX)).setText(" ");
-                ((TextView) dayContainer.getChildAt(LABEL_BOTTOM_TEXT_INDEX)).setText(" ");
+                initializeCellOfDay(dayContainer);
 
                 if (weekLoop == 0 && skipCount > 0) {
-                    dateLabel.setText(" ");
-                    dayContainer.setBackgroundColor(getResources().getColor(R.color.disable_background));
                     skipCount--;
                     continue;
                 }
 
                 if (lastDay < dayCounter) {
-                    dateLabel.setText(" ");
-                    dayContainer.setBackgroundColor(getResources().getColor(R.color.disable_background));
                     continue;
                 }
 
-                dayContainer.setOnClickListener(this);
-                dayContainer.setBackgroundColor(getResources().getColor(R.color.default_background));
-                dateLabel.setText(String.valueOf(dayCounter));
-
                 boolean isToday = (todayYear == year && todayMonth == month && todayDay == dayCounter);
+                int dayOfWeek = targetCalendar.get(Calendar.DAY_OF_WEEK);
+                buildCellOfDay(dayContainer, dayCounter, dayOfWeek, isToday);
 
-                if (isToday) {
-                    dateLabel.setTypeface(null, Typeface.BOLD);
-                }
-                else {
-                    dateLabel.setTypeface(null, Typeface.NORMAL);
-                }
-
-                if (mHolidayHightlightType != null && mHolidayHightlightType.equals(HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND)) {
-                    if (dayLoop == 0)
-                        dayContainer.setBackgroundColor(getResources().getColor(R.color.sunday_background));
-                    else if (dayLoop == WEEKDAYS - 1)
-                        dayContainer.setBackgroundColor(getResources().getColor(R.color.saturday_background));
-                }
-                else {
-                    if (dayLoop == 0) dateLabel.setTextColor(getResources().getColor(R.color.sunday_text));
-                    if (dayLoop == WEEKDAYS - 1) dateLabel.setTextColor(getResources().getColor(R.color.saturday_text));
-                }
+                targetCalendar.add(Calendar.DAY_OF_MONTH, 1);
                 dayCounter++;
             }
+        }
+    }
+
+    private void initializeCellOfDay(RelativeLayout cellOfDay) {
+        cellOfDay.setBackgroundColor(getResources().getColor(R.color.disable_background));
+        ((TextView) cellOfDay.getChildAt(LABEL_DATE_TEXT_INDEX)).setText(" ");
+        ((TextView) cellOfDay.getChildAt(LABEL_TOP_TEXT_INDEX)).setText(" ");
+        ((TextView) cellOfDay.getChildAt(LABEL_MIDDLE_TEXT_INDEX)).setText(" ");
+        ((TextView) cellOfDay.getChildAt(LABEL_BOTTOM_TEXT_INDEX)).setText(" ");
+    }
+
+    private void buildCellOfDay(RelativeLayout cellOfDay, int dayCounter, int dayOfWeek, boolean isToday) {
+        cellOfDay.setOnClickListener(this);
+        cellOfDay.setBackgroundColor(getResources().getColor(R.color.default_background));
+
+        TextView dateText = (TextView) cellOfDay.getChildAt(LABEL_DATE_TEXT_INDEX);
+        dateText.setText(String.valueOf(dayCounter));
+
+        if (isToday) dateText.setTypeface(null, Typeface.BOLD);
+        else dateText.setTypeface(null, Typeface.NORMAL);
+
+        if (mHolidayHightlightType != null && mHolidayHightlightType.equals(HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND)) {
+            if (dayOfWeek == Calendar.SUNDAY) cellOfDay.setBackgroundColor(getResources().getColor(R.color.sunday_background));
+            else if (dayOfWeek == Calendar.SATURDAY) cellOfDay.setBackgroundColor(getResources().getColor(R.color.saturday_background));
+        }
+        else {
+            if (dayOfWeek == Calendar.SUNDAY) dateText.setTextColor(getResources().getColor(R.color.sunday_text));
+            else if (dayOfWeek == Calendar.SATURDAY) dateText.setTextColor(getResources().getColor(R.color.saturday_text));
         }
     }
 
@@ -263,7 +266,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private void clickCellOfDays(View view) {
         Calendar cal = Calendar.getInstance();
         try {
-            int cellDay = Integer.parseInt(((TextView) ((RelativeLayout) view).getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
+            int cellDay = Integer.parseInt(((TextView) ((RelativeLayout) view).getChildAt(LABEL_DATE_TEXT_INDEX)).getText().toString());
             cal.set(displayYear, displayMonth, cellDay);
 
         }
