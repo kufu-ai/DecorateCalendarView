@@ -1,15 +1,10 @@
 package net.zaim.decoratecalendarview;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,9 +24,9 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private static final int MAX_WEEK = 6;
 
     private static final int LABEL_DATE_INDEX_AT_CELL = 0;
-    private static final int LABEL_SYMBOL_INDEX_AT_CELL = 1;
-    private static final int LABEL_FIRST_INDEX_AT_CELL = 2;
-    private static final int LABEL_SECOND_INDEX_AT_CELL = 3;
+    private static final int LABEL_TOP_TEXT_INDEX = 1;
+    private static final int LABEL_MIDDLE_TEXT_INDEX = 2;
+    private static final int LABEL_BOTTOM_TEXT_INDEX = 3;
 
     private static final int BIGINNING_DAY_OF_WEEK = Calendar.SUNDAY;
 
@@ -70,19 +65,23 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         mHolidayHightlightType = type;
     }
 
-    public void setSymbolLabel(int day, String text) {
-        setLabelWithPosition(day, text, LABEL_SYMBOL_INDEX_AT_CELL);
+    public void setTopTextOnDay(int day, String text, int color) {
+        setLabelWithPosition(day, text, LABEL_TOP_TEXT_INDEX, color);
     }
 
-    public void setPaymentLabel(int day, String text) {
-        setLabelWithPosition(day, text, LABEL_FIRST_INDEX_AT_CELL);
+    public void setMiddleTextOnDay(int day, String text, int color) {
+        setLabelWithPosition(day, text, LABEL_MIDDLE_TEXT_INDEX, color);
     }
 
-    public void setIncomeLabel(int day, String text) {
-        setLabelWithPosition(day, text, LABEL_SECOND_INDEX_AT_CELL);
+    public void setBottomTextOnDay(int day, String text, int color) {
+        setLabelWithPosition(day, text, LABEL_BOTTOM_TEXT_INDEX, color);
     }
 
-    private void setLabelWithPosition(int day, String text, int position) {
+    private void setLabelWithPosition(int day, String text, int position, int color) {
+        if (day < 0 || text == null || text.equals("")) return;
+        
+        if (position < LABEL_TOP_TEXT_INDEX || position > LABEL_BOTTOM_TEXT_INDEX) return;
+
         for (int weekLoop = 0; weekLoop < MAX_WEEK; weekLoop++) {
             LinearLayout weekLayout = mWeeks.get(weekLoop);
             for (int dayLoop = 0; dayLoop < WEEKDAYS; dayLoop++) {
@@ -91,6 +90,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                     int cellDay = Integer.parseInt(((TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL)).getText().toString());
                     if (cellDay == day) {
                         ((TextView) dayContainer.getChildAt(position)).setText(text);
+                        ((TextView) dayContainer.getChildAt(position)).setTextColor(color);
                         break;
                     }
                 }
@@ -183,9 +183,9 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
                 RelativeLayout dayContainer = (RelativeLayout) weekLayout.getChildAt(dayLoop);
                 TextView dateLabel = (TextView) dayContainer.getChildAt(LABEL_DATE_INDEX_AT_CELL);
 
-                ((TextView) dayContainer.getChildAt(LABEL_SYMBOL_INDEX_AT_CELL)).setText(" ");
-                ((TextView) dayContainer.getChildAt(LABEL_FIRST_INDEX_AT_CELL)).setText(" ");
-                ((TextView) dayContainer.getChildAt(LABEL_SECOND_INDEX_AT_CELL)).setText(" ");
+                ((TextView) dayContainer.getChildAt(LABEL_TOP_TEXT_INDEX)).setText(" ");
+                ((TextView) dayContainer.getChildAt(LABEL_MIDDLE_TEXT_INDEX)).setText(" ");
+                ((TextView) dayContainer.getChildAt(LABEL_BOTTOM_TEXT_INDEX)).setText(" ");
 
                 if (weekLoop == 0 && skipCount > 0) {
                     dateLabel.setText(" ");

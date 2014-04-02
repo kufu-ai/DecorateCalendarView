@@ -26,7 +26,6 @@
             android:textAlignment="textEnd"
             android:gravity="right"
             android:textSize="9sp"
-            android:textColor="@color/divider"
             android:singleLine="true" />
 
         <TextView
@@ -38,7 +37,6 @@
             android:textAlignment="textEnd"
             android:gravity="right"
             android:textSize="9sp"
-            android:textColor="@color/dark_red"
             android:singleLine="true" />
 
         <TextView
@@ -50,6 +48,5 @@
             android:textAlignment="textEnd"
             android:gravity="right"
             android:textSize="9sp"
-            android:textColor="@color/dark_green"
             android:singleLine="true" />
     </RelativeLayout>

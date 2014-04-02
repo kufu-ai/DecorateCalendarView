@@ -1,5 +1,6 @@
 package net.zaim.decoratecalendarview.sample;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,9 +25,9 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
         calendarView.set(2014, 3 - 1);
 
-        calendarView.setSymbolLabel(10, "●");
-        calendarView.setPaymentLabel(10, "¥1,200");
-        calendarView.setIncomeLabel(10, "¥10,000");
+        calendarView.setTopTextOnDay(10, "●", Color.parseColor("#eeeeee"));
+        calendarView.setMiddleTextOnDay(10, "¥1,200", Color.parseColor("#ff0000"));
+        calendarView.setBottomTextOnDay(10, "¥10,000", Color.parseColor("#00ff00"));
     }
 
 
