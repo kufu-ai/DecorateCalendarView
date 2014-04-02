@@ -9,6 +9,10 @@ Simple customizable calendar view for Android.
 Usage
 -----
 
+### Implementation
+
+Include `DecorateCalendarView` in your layout XML.
+
 ```xml
 <net.zaim.decoratecalendarview.DecorateCalendarView
     android:id="@+id/my_calendar"
@@ -16,17 +20,43 @@ Usage
     android:layout_height="wrap_content" />
 ```
 
+In the `onCreate` of your activity or the `onCreateView` of your fragment, set the view with valid date.
+
 ```java
 DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
 calendarView.setOnDecorateCalendarListener(this);
-calendarView.set(2014, 3 - 1);
-calendarView.setSymbolLabel(10, "●");
-calendarView.setPaymentLabel(10, "¥1,200");
-calendarView.setIncomeLabel(10, "¥10,000");
+calendarView.set(2014, 4 - 1);
+```
+
+### Customize
+
+The default display is as below:
+
+* Biginning week of day: Sunday
+* Holiday highlight: Date text
+
+If you want to customize, please call `DecorateCalendarView.setBiginningDayOfWeek(int)` and `DecorateCalendarView.setHolidayHighlightType(String)`.
+
+```java
+DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+// Set event listener from calendar view
+calendarView.setOnDecorateCalendarListener(this);
+// Custom calendar view
+calendarView.setmBiginningDayOfWeek(Calendar.MONDAY);
+calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
+// Draw calendar view
+calendarView.set(new Date());
+//calendarView.set(2014, 3 - 1);
+// Decorate cell of day
+calendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
+calendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
+calendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
 ```
 
 Download
 -----
+
+Download via gradle.
 
 ```groovy
 repositories {
@@ -34,7 +64,7 @@ repositories {
     maven { url 'http://zaiminc.github.com/DecorateCalendarView/repository' }
 }
 dependecies {
-    compile 'net.zaim:decoratecalendarview:(version)`
+    compile 'net.zaim.android:decoratecalendarview:0.1.0`
 }
 ```
 
