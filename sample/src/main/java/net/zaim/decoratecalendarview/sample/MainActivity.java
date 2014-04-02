@@ -8,6 +8,7 @@ import android.widget.Toast;
 import net.zaim.decoratecalendarview.DecorateCalendarView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -20,15 +21,21 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
 
         DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
 
+        // Set event listener from calendar view
         calendarView.setOnDecorateCalendarListener(this);
+
+        // Custom calendar view
         //calendarView.setmBiginningDayOfWeek(Calendar.MONDAY);
         //calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
+
+        // Draw calendar view
         calendarView.set(new Date());
         //calendarView.set(2014, 3 - 1);
 
-        calendarView.setTopTextOnDay(10, "●", Color.parseColor("#888888"));
-        calendarView.setMiddleTextOnDay(10, "¥1,200", Color.parseColor("#ff0000"));
-        calendarView.setBottomTextOnDay(10, "¥10,000", Color.parseColor("#00ff00"));
+        // Decorate cell of day
+        calendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
+        calendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
+        calendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
     }
 
 
