@@ -1,5 +1,6 @@
 apply plugin: 'android-library'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 android {
     compileSdkVersion 19
@@ -41,15 +42,84 @@ dependencies {
             'org.hamcrest:hamcrest-library:1.1'
 }
 
-def deployTo = new File(rootDir, "repository")
+android.libraryVariants.all { variant ->
+    if (variant.name == 'release') {
+        def javadocTaskName = "javadoc${variant.name.capitalize()}";
+        task(javadocTaskName, type: Javadoc) {
+            description "Generate Javadoc for ${variant.name}."
+            source = variant.javaCompile.source
+            destinationDir = reporting.file("${variant.name}-docs")
+            ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+            classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+        }
+        task("javadocsJar${variant.name.capitalize()}", type: Jar) {
+            classifier = "javadoc"
+            from tasks[javadocTaskName].destinationDir
+        }
+        task("sourcesJar${variant.name.capitalize()}", type: Jar) {
+            classifier = "sources"
+            from variant.javaCompile.source
+        }
+
+        /* artifacts management.
+         * See: http://wwww.gradle.org/docs/current/userguide/artifact_management.html
+         */
+        artifacts {
+            archives tasks["javadocsJar${variant.name.capitalize()}"]
+            archives tasks["sourcesJar${variant.name.capitalize()}"]
+        }
+    }
+}
+
+version = "0.1.0"
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+group = "net.zaim.android"
+
+signing {
+    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives")}
+    sign configurations.archives
+}
 
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository url: "file://${deployTo}"
-            pom.version = '0.1.0'
-            pom.groupId = 'net.zaim.android'
-            pom.artifactId = 'decoratecalendarview'
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+
+        def sonatypeRepo = isReleaseVersion ?
+                "https://oss.sonatype.org/service/local/staging/deploy/maven2" :
+                "https://oss.sonatype.org/content/repositories/snapshots"
+        repository(url: sonatypeRepo) {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
+        }
+
+        pom.artifactId = 'decoratecalendarview'
+        pom.project {
+            name 'DecorateCalendarView'
+            packaging 'aar'
+            description 'Simple customizable calendar view for Android.'
+            url 'https://github.com/zaiminc/DecorateCalendarView'
+
+            scm {
+                url 'scm:git@github.com/zaiminc/DecorateCalendarView.git'
+                connection 'scm:git@github.com/zaiminc/DecorateCalendarView.git'
+                developerConnection 'scm:git@github.com/zaiminc/DecorateCalendarView.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'androhi'
+                    name 'Takahiro Shimokawa'
+                    email 'shimokawa.takahiro@zaim.co.jp'
+                }
+            }
         }
     }
 }
