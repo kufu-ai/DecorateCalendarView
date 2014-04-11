@@ -26,7 +26,6 @@ In the `onCreate` of your activity or the `onCreateView` of your fragment, set t
 
 ```java
 DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
-calendarView.setOnDecorateCalendarListener(this);
 calendarView.set(2014, 4 - 1);
 ```
 
@@ -41,18 +40,38 @@ If you want to customize, please call `DecorateCalendarView.setBiginningDayOfWee
 
 ```java
 DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
-// Set event listener from calendar view
-calendarView.setOnDecorateCalendarListener(this);
+
 // Custom calendar view
 calendarView.setmBiginningDayOfWeek(Calendar.MONDAY);
 calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
+
 // Draw calendar view
 calendarView.set(new Date());
 //calendarView.set(2014, 3 - 1);
+
 // Decorate cell of day
 calendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
 calendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
 calendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
+```
+
+### Event listener
+
+This calendar provide event listener as below.
+
+* When tap date
+* When changed month
+
+```java
+DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+// Set event listener from calendar view
+calendarView.setOnDecorateCalendarListener(this);
+
+@Override
+public void onDayClick(Date day) {}
+
+@Override
+public void onChangeDisplayMonth(Date date) {}
 ```
 
 Download
@@ -63,8 +82,8 @@ Download via gradle.
 ```groovy
 repositories {
     mavenCentral()
-    maven { url 'http://zaiminc.github.com/DecorateCalendarView/repository' }
 }
+
 dependecies {
     compile 'net.zaim.android:decoratecalendarview:0.1.0`
 }

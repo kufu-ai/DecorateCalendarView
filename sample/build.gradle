@@ -1,6 +1,5 @@
 repositories {
     mavenCentral()
-    maven { url 'http://zaiminc.github.com/DecorateCalendarView/repository' }
 }
 
 apply plugin: 'android'
