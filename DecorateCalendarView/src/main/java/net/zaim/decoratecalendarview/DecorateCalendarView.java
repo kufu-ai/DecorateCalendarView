@@ -271,7 +271,9 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         try {
             int cellDay = Integer.parseInt(((TextView) ((RelativeLayout) view).getChildAt(LABEL_DATE_TEXT_INDEX)).getText().toString());
             cal.set(displayYear, displayMonth, cellDay);
-
+            if (mSelectedView != null) mSelectedView.setBackgroundColor(getResources().getColor(R.color.default_background));
+            view.setBackgroundColor(getResources().getColor(R.color.select_background));
+            mSelectedView = view;
         }
         catch (NumberFormatException e) {
             return;

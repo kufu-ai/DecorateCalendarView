@@ -6,6 +6,7 @@
 
     <color name="default_background">#fefefe</color>
     <color name="disable_background">#88f0f0f0</color>
+    <color name="select_background">#6650a135</color>
     <color name="sunday_background">#66ffcccc</color>
     <color name="saturday_background">#66ccccff</color>
     <color name="divider">#949494</color>
