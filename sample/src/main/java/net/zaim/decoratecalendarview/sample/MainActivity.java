@@ -8,7 +8,6 @@ import android.widget.Toast;
 import net.zaim.decoratecalendarview.DecorateCalendarView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -36,6 +35,9 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         calendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
         calendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
         calendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
+
+        // Set tapped cell's color
+        calendarView.setCurrentDayColor(getResources().getColor(R.color.select_background));
     }
 
 

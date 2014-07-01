@@ -41,6 +41,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private ArrayList<LinearLayout> mWeeks = new ArrayList<LinearLayout>();
     private String mHolidayHightlightType = HOLIDAY_HIGHLIGHT_TYPE_TEXT;
     private int mBiginningDayOfWeek = Calendar.SUNDAY;
+    private int mCurrentDayColor = -1;
 
     public DecorateCalendarView(Context context) {
         this(context, null);
@@ -66,6 +67,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     public void setHolidayHighlightType(String type) {
         mHolidayHightlightType = type;
+    }
+
+    public void setCurrentDayColor(int color) {
+        mCurrentDayColor = color;
     }
 
     public void setTopTextOnDay(int day, String text, int color) {
@@ -271,9 +276,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         try {
             int cellDay = Integer.parseInt(((TextView) ((RelativeLayout) view).getChildAt(LABEL_DATE_TEXT_INDEX)).getText().toString());
             cal.set(displayYear, displayMonth, cellDay);
-            if (mSelectedView != null) mSelectedView.setBackgroundColor(getResources().getColor(R.color.default_background));
-            view.setBackgroundColor(getResources().getColor(R.color.select_background));
-            mSelectedView = view;
+            changeCurrentDayColor(view);
         }
         catch (NumberFormatException e) {
             return;
@@ -299,6 +302,14 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
             set(displayYear, displayMonth);
         }
     }
+
+    private void changeCurrentDayColor(View currentDayView) {
+        if (mCurrentDayColor < 0) return;
+        if (mSelectedView != null) mSelectedView.setBackgroundColor(getResources().getColor(R.color.default_background));
+        currentDayView.setBackgroundColor(mCurrentDayColor);
+        mSelectedView = currentDayView;
+    }
+
 
     public void setOnDecorateCalendarListener(OnDecorateCalendarListener listener) {
         mOnDecorateCalendarListener = listener;
