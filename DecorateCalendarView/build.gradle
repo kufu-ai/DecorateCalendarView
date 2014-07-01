@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         minSdkVersion 8
@@ -49,7 +49,7 @@ android.libraryVariants.all { variant ->
             description "Generate Javadoc for ${variant.name}."
             source = variant.javaCompile.source
             destinationDir = reporting.file("${variant.name}-docs")
-            ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+            ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
             classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
         }
         task("javadocsJar${variant.name.capitalize()}", type: Jar) {
