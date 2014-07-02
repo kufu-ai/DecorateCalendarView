@@ -42,6 +42,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private String mHolidayHightlightType = HOLIDAY_HIGHLIGHT_TYPE_TEXT;
     private int mBiginningDayOfWeek = Calendar.SUNDAY;
     private int mCurrentDayColor = -1;
+    private boolean mIsPagerMode = false;
 
     public DecorateCalendarView(Context context) {
         this(context, null);
@@ -83,6 +84,10 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     public void setBottomTextOnDay(int day, String text, int color) {
         setLabelWithPosition(day, text, LABEL_BOTTOM_TEXT_INDEX, color);
+    }
+
+    public void setPagerMode(boolean isPagerMode) {
+        mIsPagerMode = isPagerMode;
     }
 
     private void setLabelWithPosition(int day, String text, int position, int color) {
@@ -285,6 +290,12 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     private void clickSwitchCalendar(View view) {
+        if ( mIsPagerMode && mOnDecorateCalendarListener != null) {
+            int relativePosition = (view.getId() == R.id.prev_button) ? -1 : 1;
+            mOnDecorateCalendarListener.onSwitchCalendarClick(relativePosition);
+            return;
+        }
+
         if (view.getId() == R.id.prev_button) {
             displayMonth--;
             if (displayMonth < 1) {
@@ -318,5 +329,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     public abstract interface OnDecorateCalendarListener {
         void onDayClick(Date day);
         void onChangeDisplayMonth(Date date);
+        void onSwitchCalendarClick(int position);
     }
 }
