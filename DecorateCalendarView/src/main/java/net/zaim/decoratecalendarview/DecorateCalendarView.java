@@ -43,11 +43,11 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     public void initCalendar(FragmentManager fragmentManager, Bundle bundle) {
-        mMonthPagerAdapter = new DecorateCalendarPagerAdapter(fragmentManager, bundle);
-        mMonthPager.setAdapter(mMonthPagerAdapter);
-
         createTitleView(mContext);
         addView(mMonthPager, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        mMonthPagerAdapter = new DecorateCalendarPagerAdapter(fragmentManager, bundle);
+        mMonthPager.setAdapter(mMonthPagerAdapter);
+        setDefaultTitleAndMovePage();
     }
 
     public void setTopTextOnDay(int day, String text, int color) {
@@ -68,10 +68,9 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     @Override
     public void onPageSelected(int position) {
-        setTitle(2014, position);
+        Calendar calendar = mMonthPagerAdapter.getDisplayCalendar(position);
+        setTitle(calendar);
         if (mOnDecorateCalendarListener != null) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(2014, position, 1);
             mOnDecorateCalendarListener.onChangeDisplayMonth(calendar.getTime());
         }
     }
@@ -88,11 +87,21 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         addView(header);
     }
 
+    private void setDefaultTitleAndMovePage() {
+        Calendar calendar = Calendar.getInstance();
+        // The previous is 2 years, the future is 2 years and current year.
+        int defaultPosition = 12 * 2 + calendar.get(Calendar.MONTH) - 1;
+        mMonthPager.setCurrentItem(defaultPosition, false);
+    }
+
     private void setTitle(int year, int month) {
         Calendar targetCalendar = getTargetCalendar(year, month);
+        setTitle(targetCalendar);
+    }
 
+    private void setTitle(Calendar calendar) {
         SimpleDateFormat formatter = new SimpleDateFormat(getResources().getString(R.string.calendar_title_format));
-        mTitleView.setText(formatter.format(targetCalendar.getTime()));
+        mTitleView.setText(formatter.format(calendar.getTime()));
     }
 
     private Calendar getTargetCalendar(int year, int month) {
