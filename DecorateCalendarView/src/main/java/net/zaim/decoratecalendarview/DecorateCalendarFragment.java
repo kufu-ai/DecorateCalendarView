@@ -168,6 +168,7 @@ public class DecorateCalendarFragment extends Fragment implements View.OnClickLi
     }
 
     private void initializeCellOfDay(RelativeLayout cellOfDay) {
+        if (cellOfDay == null) return;
         cellOfDay.setBackgroundColor(getResources().getColor(R.color.disable_background));
         ((TextView) cellOfDay.getChildAt(LABEL_DATE_TEXT_INDEX)).setText(" ");
         ((TextView) cellOfDay.getChildAt(LABEL_TOP_TEXT_INDEX)).setText(" ");
@@ -176,6 +177,7 @@ public class DecorateCalendarFragment extends Fragment implements View.OnClickLi
     }
 
     private void buildCellOfDay(RelativeLayout cellOfDay, int dayCounter, int dayOfWeek, boolean isToday) {
+        if (cellOfDay == null) return;
         cellOfDay.setOnClickListener(this);
         cellOfDay.setBackgroundColor(getResources().getColor(R.color.default_background));
 

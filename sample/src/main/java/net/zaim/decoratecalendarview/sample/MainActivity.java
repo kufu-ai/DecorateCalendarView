@@ -1,5 +1,6 @@
 package net.zaim.decoratecalendarview.sample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
@@ -50,8 +51,8 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         Toast.makeText(this, format.format(date), Toast.LENGTH_SHORT).show();
 
         // Decorate cell of day
-        //mCalendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
-        //mCalendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
-        //mCalendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
+        mCalendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
+        mCalendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
+        mCalendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
     }
 }
