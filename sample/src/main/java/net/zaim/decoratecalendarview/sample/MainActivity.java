@@ -25,17 +25,6 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         bundle.putString(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR, String.valueOf(R.color.select_background));
         mCalendarView.setOnDecorateCalendarListener(this);
         mCalendarView.initCalendar(getSupportFragmentManager(), bundle);
-
-        // Set event listener from calendar view
-        //calendarView.setOnDecorateCalendarListener(this);
-
-        // Custom calendar view
-        //calendarView.setmBiginningDayOfWeek(Calendar.MONDAY);
-        //calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
-
-        // Draw calendar view
-        //calendarView.set(new Date());
-        //calendarView.set(2014, 3 - 1);
     }
 
 
