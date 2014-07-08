@@ -28,6 +28,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private ViewPager mMonthPager;
     private DecorateCalendarPagerAdapter mMonthPagerAdapter;
     private TextView mTitleView;
+    private boolean mInitFlag = false;
 
     public DecorateCalendarView(Context context) {
         this(context, null);
@@ -47,7 +48,6 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
         addView(mMonthPager, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         mMonthPagerAdapter = new DecorateCalendarPagerAdapter(fragmentManager, bundle);
         mMonthPager.setAdapter(mMonthPagerAdapter);
-        setDefaultTitleAndMovePage();
     }
 
     public void setTopTextOnDay(int day, String text, int color) {
@@ -60,6 +60,15 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
 
     public void setBottomTextOnDay(int day, String text, int color) {
         mMonthPagerAdapter.getCurrentFragment(mMonthPager.getCurrentItem()).setBottomTextOnDay(day, text, color);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        if (hasWindowFocus && !mInitFlag) {
+            setDefaultTitleAndMovePage();
+            mInitFlag = true;
+        }
     }
 
     @Override
