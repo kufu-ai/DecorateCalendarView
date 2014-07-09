@@ -3,7 +3,6 @@ package net.zaim.decoratecalendarview;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +61,7 @@ public class DecorateCalendarFragment extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vGridView = (BaseGridView) inflater.inflate(R.layout.month, container, false);
         createWeekViews();
         createDayViews();
