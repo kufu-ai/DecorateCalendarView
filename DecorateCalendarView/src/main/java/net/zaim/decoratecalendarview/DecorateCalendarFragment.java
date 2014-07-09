@@ -74,7 +74,7 @@ public class DecorateCalendarFragment extends Fragment implements View.OnClickLi
         mBeginningDayOfWeek = bundle.getInt(DecorateCalendarView.BUNDLE_KEY_BEGINNING_DAY_OF_WEEK);
         mHolidayHightlightType = bundle.getString(DecorateCalendarView.BUNDLE_KEY_HOLIDAY_HIGHLIGHT_TYPE);
         if (bundle.getInt(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR) > 0) {
-            mCurrentDayColor = getResources().getColor(bundle.getInt(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR));
+            mCurrentDayColor = bundle.getInt(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR);
         }
 
         return vGridView;

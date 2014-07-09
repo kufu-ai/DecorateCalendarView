@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
 
         mCalendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
         Bundle bundle = new Bundle();
-        bundle.putString(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR, String.valueOf(R.color.select_background));
+        bundle.putString(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR, String.valueOf(getResources().getColor(R.color.select_background)));
         mCalendarView.setOnDecorateCalendarListener(this);
         mCalendarView.initCalendar(getSupportFragmentManager(), bundle);
     }
