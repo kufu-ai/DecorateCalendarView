@@ -25,8 +25,16 @@ Include `DecorateCalendarView` in your layout XML.
 In the `onCreate` of your activity or the `onCreateView` of your fragment, set the view with valid date.
 
 ```java
-DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
-calendarView.set(2014, 4 - 1);
+public class MainActivity extends FragmentActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+        calendarView.initCalendar(getSupportFragmentManager(), null);
+    }
 ```
 
 ### Customize
@@ -35,24 +43,18 @@ The default display is as below:
 
 * Biginning week of day: Sunday
 * Holiday highlight: Date text
+* Background color of selected cell: none
 
-If you want to customize, please call `DecorateCalendarView.setBiginningDayOfWeek(int)` and `DecorateCalendarView.setHolidayHighlightType(String)`.
+If you want to customize, set parameter to `initCalendar(FragmentManager, Bundle)` method.
 
 ```java
 DecorateCalendarView calendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+Bundle bundle = new Bundle();
 
 // Custom calendar view
-calendarView.setmBiginningDayOfWeek(Calendar.MONDAY);
-calendarView.setHolidayHighlightType(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND);
-
-// Draw calendar view
-calendarView.set(new Date());
-//calendarView.set(2014, 3 - 1);
-
-// Decorate cell of day
-calendarView.setTopTextOnDay(10, "top", Color.parseColor("#00ff00"));
-calendarView.setMiddleTextOnDay(10, "middle", Color.parseColor("#ff0000"));
-calendarView.setBottomTextOnDay(10, "bottom", Color.parseColor("#0000ff"));
+bundle.putString(DecorateCalendarView.BUNDLE_KEY_BEGINNING_DAY_OF_WEEK, String.valueOf(Calendar.MONDAY));
+bundle.putString(DecorateCalendarView.BUNDLE_KEY_HOLIDAY_HIGHLIGHT_TYPE, String.valueOf(DecorateCalendarView.HOLIDAY_HIGHLIGHT_TYPE_BACKGROUND));
+bundle.putString(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR, String.valueOf(Color.parseColor("555555")));
 ```
 
 ### Event listener
@@ -85,7 +87,7 @@ repositories {
 }
 
 dependecies {
-    compile 'net.zaim.android:decoratecalendarview:0.1.0`
+    compile 'net.zaim.android:decoratecalendarview:0.2.1`
 }
 ```
 
