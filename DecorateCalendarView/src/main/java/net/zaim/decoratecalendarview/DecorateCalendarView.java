@@ -29,6 +29,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     private DecorateCalendarPagerAdapter mMonthPagerAdapter;
     private TextView mTitleView;
     private boolean mInitFlag = false;
+    private DecorateCalendarFragment mCurrentFragment;
 
     public DecorateCalendarView(Context context) {
         this(context, null);
@@ -51,15 +52,15 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     }
 
     public void setTopTextOnDay(int day, String text, int color) {
-        mMonthPagerAdapter.getCurrentFragment(mMonthPager.getCurrentItem()).setTopTextOnDay(day, text, color);
+        if (mCurrentFragment != null) mCurrentFragment.setTopTextOnDay(day, text, color);
     }
 
     public void setMiddleTextOnDay(int day, String text, int color) {
-        mMonthPagerAdapter.getCurrentFragment(mMonthPager.getCurrentItem()).setMiddleTextOnDay(day, text, color);
+        if (mCurrentFragment != null) mCurrentFragment.setMiddleTextOnDay(day, text, color);
     }
 
     public void setBottomTextOnDay(int day, String text, int color) {
-        mMonthPagerAdapter.getCurrentFragment(mMonthPager.getCurrentItem()).setBottomTextOnDay(day, text, color);
+        if (mCurrentFragment != null) mCurrentFragment.setBottomTextOnDay(day, text, color);
     }
 
     @Override
@@ -79,6 +80,7 @@ public class DecorateCalendarView extends LinearLayout implements View.OnClickLi
     public void onPageSelected(int position) {
         Calendar calendar = mMonthPagerAdapter.getDisplayCalendar(position);
         setTitle(calendar);
+        mCurrentFragment = mMonthPagerAdapter.getCurrentFragment(position);
         if (mOnDecorateCalendarListener != null) {
             mOnDecorateCalendarListener.onChangeDisplayMonth(calendar.getTime());
         }
