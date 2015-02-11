@@ -19,7 +19,6 @@
         android:layout_below="@id/day_text"
         android:gravity="right"
         android:textSize="@dimen/dcv_font_small"
-        android:text="¥1,234"
         />
 
     <TextView
@@ -30,7 +29,6 @@
         android:layout_below="@id/free_text_top"
         android:gravity="right"
         android:textSize="@dimen/dcv_font_small"
-        android:text="¥1,234"
         />
 
     <TextView
@@ -41,7 +39,6 @@
         android:layout_below="@id/free_text_middle"
         android:gravity="right"
         android:textSize="@dimen/dcv_font_small"
-        android:text="¥1,234"
         />
 
 </RelativeLayout>

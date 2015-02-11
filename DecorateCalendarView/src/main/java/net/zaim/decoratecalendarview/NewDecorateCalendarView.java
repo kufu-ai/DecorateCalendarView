@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import java.util.Calendar;
+
 public class NewDecorateCalendarView extends FrameLayout implements ViewPager.OnPageChangeListener {
 
     private Context mContext;
@@ -35,7 +37,11 @@ public class NewDecorateCalendarView extends FrameLayout implements ViewPager.On
     }
 
     public void setFragmentManager(FragmentManager fragmentManager) {
-        mViewPager.setAdapter(new NewPagerAdapter(fragmentManager));
+        Calendar calendar = Calendar.getInstance();
+        // The previous is 2 years, the future is 2 years and current year.
+        int defaultPosition = 12 * 2 + calendar.get(Calendar.MONTH);
+        mViewPager.setAdapter(new NewPagerAdapter(fragmentManager, defaultPosition));
+        mViewPager.setCurrentItem(defaultPosition, false);
     }
 
     @Override

@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
 
     private static final int VIEW_TYPE_HEADER = 0;
@@ -17,6 +19,8 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
 
     private Context mContext;
     private LayoutInflater mInflater;
+    private Calendar mTargetCalendar;
+    private int mDayCounter;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mWeekTextView;
@@ -37,9 +41,12 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
         }
     }
 
-    public NewAdapter(Context context) {
+    public NewAdapter(Context context, int year, int month) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        mTargetCalendar = Calendar.getInstance();
+        mTargetCalendar.set(year, month - 1, 1);
+        mDayCounter = 1;
     }
 
     @Override
@@ -56,9 +63,15 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
                 holder.getWeekTextView().setText(DAY_OF_WEEK[position]);
                 break;
             case VIEW_TYPE_ITEM:
-                holder.getDayTextView().setText(String.valueOf(position - 7 + 1));
-                if (position % 7 == 0) holder.getDayTextView().setTextColor(Color.RED);
-                if (position % 7 == 6) holder.getDayTextView().setTextColor(Color.BLUE);
+                if (mTargetCalendar.get(Calendar.DAY_OF_WEEK) <= (position - 7 + 1) &&
+                        mTargetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) >= mDayCounter) {
+                    holder.getDayTextView().setText(String.valueOf(mDayCounter));
+                    if (position % 7 == 0) holder.getDayTextView().setTextColor(Color.RED);
+                    if (position % 7 == 6) holder.getDayTextView().setTextColor(Color.BLUE);
+                    mDayCounter++;
+                } else {
+                    holder.getDayTextView().setText("");
+                }
                 break;
         }
     }
@@ -70,6 +83,6 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 31 + 7;
+        return 49;
     }
 }
