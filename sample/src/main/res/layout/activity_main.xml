@@ -4,8 +4,16 @@
     android:layout_height="match_parent"
     tools:context="net.zaim.decoratecalendarview.sample.MainActivity">
 
+    <!--
     <net.zaim.decoratecalendarview.DecorateCalendarView
         android:id="@+id/my_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    -->
+    <net.zaim.decoratecalendarview.NewDecorateCalendarView
+        android:id="@+id/new_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </net.zaim.decoratecalendarview.NewDecorateCalendarView>
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
 import net.zaim.decoratecalendarview.DecorateCalendarView;
+import net.zaim.decoratecalendarview.NewDecorateCalendarView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,11 +21,13 @@ public class MainActivity extends ActionBarActivity implements DecorateCalendarV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCalendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
-        Bundle bundle = new Bundle();
-        bundle.putString(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR, String.valueOf(getResources().getColor(R.color.select_background)));
-        mCalendarView.setOnDecorateCalendarListener(this);
-        mCalendarView.initCalendar(getSupportFragmentManager(), bundle);
+//        mCalendarView = (DecorateCalendarView) findViewById(R.id.my_calendar);
+//        Bundle bundle = new Bundle();
+//        bundle.putString(DecorateCalendarView.BUNDLE_KEY_SELECTED_COLOR, String.valueOf(getResources().getColor(R.color.select_background)));
+//        mCalendarView.setOnDecorateCalendarListener(this);
+//        mCalendarView.initCalendar(getSupportFragmentManager(), bundle);
+        NewDecorateCalendarView calendarView = (NewDecorateCalendarView) findViewById(R.id.new_calendar);
+        calendarView.setFragmentManager(getSupportFragmentManager());
     }
 
 
