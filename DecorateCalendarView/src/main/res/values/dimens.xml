@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dcv_item_height_large">72dp</dimen>
+    <dimen name="dcv_item_height_regular">48dp</dimen>
+    <dimen name="dcv_item_height_small">32dp</dimen>
+
+    <dimen name="dcv_font_normal">14sp</dimen>
+    <dimen name="dcv_font_small">10sp</dimen>
+</resources>

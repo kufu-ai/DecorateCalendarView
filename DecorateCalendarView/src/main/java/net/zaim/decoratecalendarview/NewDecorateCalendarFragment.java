@@ -18,7 +18,7 @@ public class NewDecorateCalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_decorate_calendar, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 7));
-        mRecyclerView.setAdapter(new NewAdapter());
+        mRecyclerView.setAdapter(new NewAdapter(getActivity()));
         return view;
     }
 }
