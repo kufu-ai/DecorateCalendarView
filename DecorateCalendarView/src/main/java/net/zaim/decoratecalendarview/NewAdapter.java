@@ -1,7 +1,6 @@
 package net.zaim.decoratecalendarview;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,9 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
     private Context mContext;
     private LayoutInflater mInflater;
     private Calendar mTargetCalendar;
-    private int mDayCounter;
+    private int mPage;
+    private int mFirstDayOfWeek;
+    private int mMaxDay;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mWeekTextView;
@@ -41,12 +42,17 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
         }
     }
 
-    public NewAdapter(Context context, int year, int month) {
+    public NewAdapter(Context context, int year, int month, int page) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mTargetCalendar = Calendar.getInstance();
         mTargetCalendar.set(year, month - 1, 1);
-        mDayCounter = 1;
+
+
+        mTargetCalendar.set(2015, 0, 1);
+        mPage = page;
+        mFirstDayOfWeek = mTargetCalendar.get(Calendar.DAY_OF_WEEK);
+        mMaxDay = mTargetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
     @Override
@@ -60,17 +66,22 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case VIEW_TYPE_HEADER:
-                holder.getWeekTextView().setText(DAY_OF_WEEK[position]);
+                holder.getWeekTextView().setText(DAY_OF_WEEK[position % 7]);
                 break;
             case VIEW_TYPE_ITEM:
-                if (mTargetCalendar.get(Calendar.DAY_OF_WEEK) <= (position - 7 + 1) &&
-                        mTargetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) >= mDayCounter) {
-                    holder.getDayTextView().setText(String.valueOf(mDayCounter));
-                    if (position % 7 == 0) holder.getDayTextView().setTextColor(Color.RED);
-                    if (position % 7 == 6) holder.getDayTextView().setTextColor(Color.BLUE);
-                    mDayCounter++;
+                int relativePosition = position - mPage * 49;
+                if (relativePosition < 0 || relativePosition > 49) {
+                    holder.getDayTextView().setText("-");
+                    break;
+                }
+                int dayIndex = relativePosition - 7 + 1;
+                int displayDay = dayIndex - mFirstDayOfWeek + 1;
+                if (mFirstDayOfWeek <= dayIndex && displayDay <= mMaxDay) {
+                    holder.getDayTextView().setText(String.valueOf(displayDay));
+//                if (position % 7 == 0) holder.getDayTextView().setTextColor(Color.RED);
+//                if (position % 7 == 6) holder.getDayTextView().setTextColor(Color.BLUE);
                 } else {
-                    holder.getDayTextView().setText("");
+                    holder.getDayTextView().setText("x");
                 }
                 break;
         }
@@ -78,11 +89,11 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return (position / 7 == 0) ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+        return ((position / 7) % 7 == 0) ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
     }
 
     @Override
     public int getItemCount() {
-        return 49;
+        return 49 * 12 * 5;
     }
 }
